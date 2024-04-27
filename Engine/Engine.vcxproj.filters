@@ -1,33 +1,99 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{306f1cab-8708-4580-9c6a-8ed4f453c33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{6ba64275-7225-48e8-a886-89880b53ec26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{34f8d587-78de-437f-8967-44c03cdf03e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{40e465a9-52f3-4e32-97b4-314d12a228ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\Header">
+      <UniqueIdentifier>{4a09412c-1217-40c5-b5a6-4f6e50fa1b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\Source">
+      <UniqueIdentifier>{1cf53c4a-b342-486a-ac8b-4564063464db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\Header\ImGUI">
+      <UniqueIdentifier>{483a0bbf-bc56-45cb-a6ec-74cdf036f36d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Engine.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\DirectXTex.h">
+      <Filter>External\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\d3dx12.h">
+      <Filter>External\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\ImGUI\imconfig.h">
+      <Filter>External\Header\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\ImGUI\imgui.h">
+      <Filter>External\Header\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\ImGUI\imgui_impl_dx12.h">
+      <Filter>External\Header\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\ImGUI\imgui_impl_win32.h">
+      <Filter>External\Header\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\ImGUI\imgui_internal.h">
+      <Filter>External\Header\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\ImGUI\imstb_rectpack.h">
+      <Filter>External\Header\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\ImGUI\imstb_textedit.h">
+      <Filter>External\Header\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="External\Include\ImGUI\imstb_truetype.h">
+      <Filter>External\Header\ImGUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>PCH</Filter>
     </ClCompile>
+    <ClCompile Include="System\Engine.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="External\Include\ImGUI\imgui.cpp">
+      <Filter>External\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="External\Include\ImGUI\imgui_demo.cpp">
+      <Filter>External\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="External\Include\ImGUI\imgui_draw.cpp">
+      <Filter>External\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="External\Include\ImGUI\imgui_impl_dx12.cpp">
+      <Filter>External\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="External\Include\ImGUI\imgui_impl_win32.cpp">
+      <Filter>External\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="External\Include\DirectXTex.inl">
+      <Filter>External\Source</Filter>
+    </None>
   </ItemGroup>
 </Project>

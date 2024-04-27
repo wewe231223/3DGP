@@ -10,4 +10,42 @@
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
 
+#include <Windows.h>
+
+
+// DirectX 런타임 헤더 파일입니다.
+#include <wrl.h>
+#include <d3d12.h>
+#include "External/Include/d3dx12.h"
+#include "External/Include/DirectXTex.h"
+#include "External/Include/DirectXTex.inl"
+#include <dxgi1_4.h>
+#include <D3Dcompiler.h>
+#include <DirectXMath.h>
+#include <DirectXPackedVector.h>
+#include <DirectXColors.h>
+#include <DirectXCollision.h>
+#define DIRECTINPUT_VERSION 0x0800
+#include <dinput.h>
+#include "comdef.h"
+#include "dxgidebug.h"
+
+using Microsoft::WRL::ComPtr;
+
+// DirectX 라이브러리 링크 
+#pragma comment(lib, "d3dcompiler.lib")
+#pragma comment(lib, "d3d12.lib")
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "dinput8.lib")
+#pragma comment(lib, "dxguid.lib")
+
+
+#ifdef max 
+#undef max 
+#endif
+
+#ifdef min 
+#undef min 
+#endif
+
 #endif //PCH_H

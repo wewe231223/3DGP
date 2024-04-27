@@ -14,4 +14,9 @@
 #include <memory.h>
 #include <tchar.h>
 
-#
+
+#if defined(DEBUG) || defined(_DEBUG)
+#pragma comment(lib,"Engine/Out/Debug/Engine.lib")
+#else 
+#pragma comment(lib,"../Engine/Out/Release/Engine.lib")
+#endif 
