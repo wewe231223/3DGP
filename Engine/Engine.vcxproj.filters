@@ -26,6 +26,18 @@
     <Filter Include="External\Header\ImGUI">
       <UniqueIdentifier>{483a0bbf-bc56-45cb-a6ec-74cdf036f36d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header\System">
+      <UniqueIdentifier>{81807567-be33-4540-93b5-2be837b52220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\System">
+      <UniqueIdentifier>{8af69e6e-0f80-4dae-93e6-91d068a002b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\System\DirectX">
+      <UniqueIdentifier>{d84c7caf-dd35-40b2-bb8a-5d666be5e07f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\System\DirectX">
+      <UniqueIdentifier>{5deb484d-3115-4d1b-9af7-174d9622767f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -33,9 +45,6 @@
     </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>PCH</Filter>
-    </ClInclude>
-    <ClInclude Include="System\Engine.h">
-      <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="External\Include\DirectXTex.h">
       <Filter>External\Header</Filter>
@@ -67,13 +76,34 @@
     <ClInclude Include="External\Include\ImGUI\imstb_truetype.h">
       <Filter>External\Header\ImGUI</Filter>
     </ClInclude>
+    <ClInclude Include="System\SwapChain.h">
+      <Filter>Header\System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Engine.h">
+      <Filter>Header\System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="System\DepthStencil.h">
+      <Filter>Header\System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Device.h">
+      <Filter>Header\System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CommandQueue.h">
+      <Filter>Header\System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CommandList.h">
+      <Filter>Header\System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Exeption.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Timer.h">
+      <Filter>Header\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>PCH</Filter>
-    </ClCompile>
-    <ClCompile Include="System\Engine.cpp">
-      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="External\Include\ImGUI\imgui.cpp">
       <Filter>External\Source</Filter>
@@ -89,6 +119,30 @@
     </ClCompile>
     <ClCompile Include="External\Include\ImGUI\imgui_impl_win32.cpp">
       <Filter>External\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="System\SwapChain.cpp">
+      <Filter>Source\System\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Engine.cpp">
+      <Filter>Source\System\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Device.cpp">
+      <Filter>Source\System\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="System\DepthStencil.cpp">
+      <Filter>Source\System\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CommandQueue.cpp">
+      <Filter>Source\System\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CommandList.cpp">
+      <Filter>Source\System\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Exeption.cpp">
+      <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Timer.cpp">
+      <Filter>Source\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
