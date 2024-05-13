@@ -166,6 +166,10 @@
     <ClInclude Include="External\Include\ImGUI\imstb_textedit.h" />
     <ClInclude Include="External\Include\ImGUI\imstb_truetype.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Graphics\GameObject.h" />
+    <ClInclude Include="Graphics\Mesh.h" />
+    <ClInclude Include="Graphics\Scene.h" />
+    <ClInclude Include="Graphics\Shader.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="System\CommandList.h" />
     <ClInclude Include="System\CommandQueue.h" />
@@ -197,6 +201,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Graphics\GameObject.cpp" />
+    <ClCompile Include="Graphics\Mesh.cpp" />
+    <ClCompile Include="Graphics\Scene.cpp" />
+    <ClCompile Include="Graphics\Shader.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

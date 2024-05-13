@@ -19,13 +19,13 @@ Engine::Engine(HINSTANCE__* hInstance, HWND__* hWnd) : m_hInstance(hInstance), m
 	m_depthStencil = std::make_unique<DepthStencil>(m_device->GetDevice());
 	m_timer = std::make_unique<Timer>(m_hWnd);
 
-	RECT r{};
-	::GetClientRect(m_hWnd, &r);
+
+	::GetClientRect(m_hWnd, std::addressof(m_clientRect));
 
 	m_commandList->Open();
 
-	m_swapChain->Resize(m_device->GetDevice(),m_commandList->GetCommandList(),r);
-	m_depthStencil->Resize(m_device->GetDevice(), m_commandList->GetCommandList(), r, m_swapChain->GetMsaaQualityLevel());
+	m_swapChain->Resize(m_device->GetDevice(),m_commandList->GetCommandList(), m_clientRect);
+	m_depthStencil->Resize(m_device->GetDevice(), m_commandList->GetCommandList(), m_clientRect, m_swapChain->GetMsaaQualityLevel());
 
 	m_commandList->Close();
 	ID3D12CommandList* commandlists[]{ m_commandList->GetCommandList() };
@@ -51,9 +51,39 @@ void Engine::Render(){
 
 	m_swapChain->OMSetRenderTareget(m_commandList->GetCommandList(),m_depthStencil->GetDescriptorHeapAddr());
 	m_swapChain->ResolveRenderTarget(m_commandList->GetCommandList());
+
+	// ÀÌ ¹Ø¿¡ ¹º°¡ ±×·Á¾ß ÇÑ´Ù. 
+
+
 	m_commandList->Close();
 	ID3D12CommandList* commandlists[] {m_commandList->GetCommandList()};
 	m_commandQueue->Execute(commandlists, _countof(commandlists));
 	m_swapChain->Present();
 	m_commandQueue->SingleSync();
+}
+
+void Engine::Resize(){
+	m_commandQueue->SingleSync();
+	m_commandList->Open();
+	::GetClientRect(m_hWnd, std::addressof(m_clientRect));
+	m_swapChain->Resize(m_device->GetDevice(), m_commandList->GetCommandList(), m_clientRect);
+	m_depthStencil->Resize(m_device->GetDevice(), m_commandList->GetCommandList(), m_clientRect, m_swapChain->GetMsaaQualityLevel());
+	m_commandList->Close();
+	m_commandQueue->SingleSync();
+}
+
+LRESULT Engine::ProcessWindowMessage(UINT Msg, WPARAM Wparam, LPARAM Lparam){
+	switch (Msg)
+	{
+	case WM_SIZE:
+		
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
+		return DefWindowProc(m_hWnd, Msg, Wparam, Lparam);
+	}
+	return 0;
+	return LRESULT();
 }

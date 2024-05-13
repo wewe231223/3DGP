@@ -13,7 +13,7 @@ Timer::~Timer(){
 
 }
 
-void Timer::Update(float fLockFPS){
+void Timer::Update(float LockFPS){
 	if (m_stopped){
 		m_timeElapsed = 0.0f;
 		return;
@@ -23,8 +23,8 @@ void Timer::Update(float fLockFPS){
 	::QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(std::addressof(m_currentPerformanceCounter)));
 	TimeElapsed = static_cast<float>((m_currentPerformanceCounter - m_lastPerformanceCounter) * m_timeScale);
 
-	if (fLockFPS > 0.0f) {
-		while (TimeElapsed < (1.0f / fLockFPS)){
+	if (LockFPS > 0.0f) {
+		while (TimeElapsed < (1.0f / LockFPS)){
 			::QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&m_currentPerformanceCounter));
 			TimeElapsed = static_cast<float>((m_currentPerformanceCounter - m_lastPerformanceCounter) * m_timeScale);
 		}

@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="PCH">
       <UniqueIdentifier>{306f1cab-8708-4580-9c6a-8ed4f453c33e}</UniqueIdentifier>
     </Filter>
@@ -37,6 +33,12 @@
     </Filter>
     <Filter Include="Source\System\DirectX">
       <UniqueIdentifier>{5deb484d-3115-4d1b-9af7-174d9622767f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Graphics">
+      <UniqueIdentifier>{2430993e-47a0-4c4e-acf5-f395eccf51f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics">
+      <UniqueIdentifier>{2651bc44-80e3-41a4-b291-593cbadab0d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +102,18 @@
     <ClInclude Include="System\Timer.h">
       <Filter>Header\System</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Scene.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GameObject.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Mesh.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -143,6 +157,18 @@
     </ClCompile>
     <ClCompile Include="System\Timer.cpp">
       <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Scene.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\GameObject.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Mesh.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader.cpp">
+      <Filter>Source\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
