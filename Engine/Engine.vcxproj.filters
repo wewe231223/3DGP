@@ -40,6 +40,9 @@
     <Filter Include="Source\Graphics">
       <UniqueIdentifier>{2651bc44-80e3-41a4-b291-593cbadab0d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{73dc7e14-c189-42fa-83b9-6daa33b29485}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -175,5 +178,10 @@
     <None Include="External\Include\DirectXTex.inl">
       <Filter>External\Source</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Client\Shaders\Default.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

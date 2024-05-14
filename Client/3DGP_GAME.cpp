@@ -6,7 +6,7 @@
 
 #include "Engine/framework.h"
 #include "Engine/System/Engine.h"
-
+#include "Engine/System/Exeption.h"
 
 #define MAX_LOADSTRING 100
 
@@ -42,7 +42,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HWND hWnd = InitInstance(hInstance, nCmdShow);
     if (!hWnd) return FALSE;
 
-    GameRenderEngine = std::make_unique<Engine>(hInstance, hWnd);
+
+    try {
+        GameRenderEngine = std::make_unique<Engine>(hInstance, hWnd);
+    }
+    catch (Exeption e) {
+        MessageBox(nullptr, e.ToString().c_str(), _T("Error"), MB_OK);
+        PostQuitMessage(0);
+    }
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_MY3DGPGAME));
 
@@ -134,7 +141,8 @@ HWND InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
-    return GameRenderEngine->ProcessWindowMessage(message, wParam, lParam);
+    
+    return GameRenderEngine ? GameRenderEngine->ProcessWindowMessage(message, wParam, lParam) : DefWindowProc(hWnd,message,wParam,lParam);
 }
 
 // 정보 대화 상자의 메시지 처리기입니다.

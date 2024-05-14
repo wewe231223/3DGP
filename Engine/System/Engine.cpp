@@ -11,6 +11,8 @@
 #include "System/Timer.h"
 #pragma endregion 
 
+#include "Graphics/Shader.h"
+
 Engine::Engine(HINSTANCE__* hInstance, HWND__* hWnd) : m_hInstance(hInstance), m_hWnd(hWnd) {
 	m_device = std::make_unique<Device>();
 	m_commandQueue = std::make_unique<CommandQueue>(m_device->GetDevice());
@@ -32,6 +34,8 @@ Engine::Engine(HINSTANCE__* hInstance, HWND__* hWnd) : m_hInstance(hInstance), m
 	m_commandQueue->Execute(commandlists, _countof(commandlists));
 	m_commandQueue->SingleSync();
 	m_timer->Start();
+
+	Shader sh{ "./Shaders/Default.hlsl","VS_Main","vs_5_0"};
 
 }
 
@@ -73,17 +77,18 @@ void Engine::Resize(){
 }
 
 LRESULT Engine::ProcessWindowMessage(UINT Msg, WPARAM Wparam, LPARAM Lparam){
-	switch (Msg)
-	{
-	case WM_SIZE:
+	if (m_hWnd){
+		switch (Msg)
+		{
+		case WM_SIZE:
 		
-		break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	default:
-		return DefWindowProc(m_hWnd, Msg, Wparam, Lparam);
+			break;
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			break;
+		default:
+			return DefWindowProc(m_hWnd, Msg, Wparam, Lparam);
+		}
 	}
-	return 0;
 	return LRESULT();
 }
