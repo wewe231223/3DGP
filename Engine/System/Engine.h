@@ -12,10 +12,13 @@ private:
 	std::unique_ptr<class Device>			m_device{ nullptr };
 	std::unique_ptr<class SwapChain>		m_swapChain{ nullptr };
 	std::unique_ptr<class CommandQueue>		m_commandQueue{ nullptr };
-	std::unique_ptr<class CommandList>		m_commandList{ nullptr };
+	std::unique_ptr<class CommandList>		m_resourceCommandList{ nullptr };
+	std::unique_ptr<class CommandList>		m_renderCommandList{ nullptr };
 	std::unique_ptr<class DepthStencil>		m_depthStencil{ nullptr };
 private:
 	std::unique_ptr<class Timer>			m_timer{ nullptr };
+private:
+	std::unique_ptr<class Scene>			m_scene{ nullptr };
 public:
 	void Update();
 	void Render();

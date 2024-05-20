@@ -19,6 +19,9 @@
 #include <algorithm>
 #include <regex>
 #include <iostream>
+#include <unordered_map>
+#include <functional>
+
 
 namespace fs = std::filesystem;
 

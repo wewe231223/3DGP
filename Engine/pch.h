@@ -39,6 +39,12 @@ using Microsoft::WRL::ComPtr;
 #pragma comment(lib, "dxguid.lib")
 
 
+#if defined(DEBUG) | defined(_DEBUG)
+#pragma comment(lib,"External/Lib/DirectXTex_debug.lib")
+#else
+#pragma comment(lib,"External/Lib/DirectXTex.lib")
+#endif
+
 #ifdef max 
 #undef max 
 #endif
@@ -50,4 +56,14 @@ using Microsoft::WRL::ComPtr;
 
 #include "framework.h"
 #include "../Engine/System/Exeption.h"
+
+enum class ShaderType {
+	VertexShader,
+	GeometryShader,
+	HullShader,
+	DomainShader,
+	PixelShader,
+	ShaderTypeCount
+};
+
 #endif //PCH_H

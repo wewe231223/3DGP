@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "SwapChain.h"
 
+UINT msaaq = 0;
+
 SwapChain::SwapChain(HWND hWnd,IDXGIFactory4* factory,ID3D12Device* device,ID3D12CommandQueue* commandQueue,DXGI_FORMAT format){
 	m_swapChain.Reset();
 
@@ -17,6 +19,7 @@ SwapChain::SwapChain(HWND hWnd,IDXGIFactory4* factory,ID3D12Device* device,ID3D1
 
 	// 0 이라면 지원 안함, 0 이상이라면 m_massQuality -1 의 수준 지원 
 	m_msaaQuality = msaa4xState.NumQualityLevels;
+	msaaq = m_msaaQuality;
 
 	RECT r{};
 	::GetClientRect(m_hWnd, &r);
@@ -25,10 +28,10 @@ SwapChain::SwapChain(HWND hWnd,IDXGIFactory4* factory,ID3D12Device* device,ID3D1
 
 	SwapChainDesc.BufferDesc.Width = static_cast<UINT>(r.right - r.left);
 	SwapChainDesc.BufferDesc.Height = static_cast<UINT>(r.bottom - r.top);
-	SwapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
-	SwapChainDesc.BufferDesc.RefreshRate.Denominator = 0;
+	SwapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+	SwapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	SwapChainDesc.BufferDesc.Format = m_format;
-	SwapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE;
+	SwapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 	SwapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
 	SwapChainDesc.SampleDesc.Count = 1;
 	SwapChainDesc.SampleDesc.Quality = 0;
@@ -69,7 +72,10 @@ D3D12_CPU_DESCRIPTOR_HANDLE SwapChain::GetCurrBackBufferView() const {
 	};
 }
 
-void SwapChain::Resize(ID3D12Device* device, ID3D12CommandList* commandlist,RECT& clientrect) {
+void SwapChain::Resize(ID3D12Device* device, ID3D12CommandList* commandlist, RECT& clientrect) {
+
+
+
 	for (auto i = 0; i < SwapChain::BUFFER_COUNT; ++i) {
 		m_presentbackBuffers[i].Reset();
 		m_msaa4xBackBuffers[i].Reset();
@@ -98,10 +104,10 @@ void SwapChain::Resize(ID3D12Device* device, ID3D12CommandList* commandlist,RECT
 
 	D3D12_CLEAR_VALUE ClearValue{};
 	ClearValue.Format = m_format;
-	ClearValue.Color[0] = DirectX::Colors::LightSteelBlue[0];
-	ClearValue.Color[1] = DirectX::Colors::LightSteelBlue[1];
-	ClearValue.Color[2] = DirectX::Colors::LightSteelBlue[2];
-	ClearValue.Color[3] = DirectX::Colors::LightSteelBlue[3];
+	ClearValue.Color[0] = DirectX::Colors::Black[0];
+	ClearValue.Color[1] = DirectX::Colors::Black[1];
+	ClearValue.Color[2] = DirectX::Colors::Black[2];
+	ClearValue.Color[3] = DirectX::Colors::Black[3];
 
 	CD3DX12_HEAP_PROPERTIES DefaultHeapProperties{ CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT) };
 	RtvHandle = m_msaa4xRenderTargetDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
@@ -110,6 +116,7 @@ void SwapChain::Resize(ID3D12Device* device, ID3D12CommandList* commandlist,RECT
 	rtvdesc.Format = m_format;
 	rtvdesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2DMS;
 
+	
 
 	for(auto i = 0; i < SwapChain::BUFFER_COUNT; ++i){
 		CheckFailed(device->CreateCommittedResource(
