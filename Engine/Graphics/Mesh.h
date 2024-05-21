@@ -22,6 +22,8 @@ public:
 	void Initialize(ID3D12Device* device, ID3D12GraphicsCommandList* commandList, const fs::path& filePath);
 
 	void Render(ID3D12GraphicsCommandList* commandList);
+	void Render(ID3D12GraphicsCommandList* commandList, D3D12_VERTEX_BUFFER_VIEW instanceView);
+
 private:
 	void CreateBuffer(ID3D12Device* device, ID3D12GraphicsCommandList* commandList, 
 		ComPtr<ID3D12Resource>& defaultBuffer, ComPtr<ID3D12Resource>& uploadBuffer,

@@ -12,9 +12,18 @@ Mesh::~Mesh()
 void Mesh::Render(ID3D12GraphicsCommandList* commandList){
 	commandList->IASetVertexBuffers(0, 1, &m_vertexBufferView);
 	commandList->IASetIndexBuffer(&m_indexBufferView);
-	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	commandList->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	commandList->DrawIndexedInstanced(m_indexCount, 1, 0, 0, 0);
+}
+
+void Mesh::Render(ID3D12GraphicsCommandList* commandList, D3D12_VERTEX_BUFFER_VIEW instanceView){
+	D3D12_VERTEX_BUFFER_VIEW views[] = { m_vertexBufferView, instanceView };
+	commandList->IASetVertexBuffers(0, _countof(views), views);
+	commandList->IASetIndexBuffer(&m_indexBufferView);
+	commandList->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	commandList->DrawIndexedInstanced(m_indexCount, 1000, 0, 0, 0);
 }
 
 void Mesh::CreateBuffer(ID3D12Device* device, ID3D12GraphicsCommandList* commandList, ComPtr<ID3D12Resource>& defaultBuffer,ComPtr<ID3D12Resource>& uploadBuffer, void* data, UINT64 size){

@@ -3,8 +3,8 @@ struct VS_IN
     float3 POSITION : POSITION;
     float3 NORMAL : NORMAL;
     float2 TEXCOORD : TEXCOORD;
- //   matrix World : WORLDMATRIX;
- //   uint instanceID : SV_InstanceID;
+    matrix World : WORLDMATRIX;
+    uint instanceID : SV_InstanceID;
 };
 
 struct VS_OUT
@@ -36,6 +36,7 @@ cbuffer cbPerPass : register(b1)
 
 
 Texture2D Diffuse : register(t0);
+
 cbuffer cbMaterial : register(b2){
     float4 gDiffuseAlbedo;
     float3 gFresnelR0;
@@ -48,7 +49,7 @@ VS_OUT VS_Main(VS_IN Input)
 {
     VS_OUT output = (VS_OUT) 0;
     
-    output.Pos = mul(float4(Input.POSITION, 1.0f), ViewProj);
+    output.Pos = mul(mul(float4(Input.POSITION, 1.0f), Input.World), ViewProj);
     output.Normal = Input.NORMAL;
     output.Tex = Input.TEXCOORD;
    
@@ -57,5 +58,6 @@ VS_OUT VS_Main(VS_IN Input)
 
 float4 PS_Main(VS_OUT Input) : SV_Target
 {
-    return float4(0.5f, 0.5f, 0.5f, 1.f);
+   return Diffuse.Sample(gsamAnisotropicClamp, Input.Tex);
+    
 }

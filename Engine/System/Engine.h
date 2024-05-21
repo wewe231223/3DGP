@@ -17,11 +17,11 @@ private:
 	std::unique_ptr<class DepthStencil>		m_depthStencil{ nullptr };
 private:
 	std::unique_ptr<class Timer>			m_timer{ nullptr };
+	std::unique_ptr<class Input>			m_input{ nullptr };
 private:
 	std::unique_ptr<class Scene>			m_scene{ nullptr };
 public:
 	void Update();
 	void Render();
 	void Resize();
-	LRESULT ProcessWindowMessage(UINT Msg, WPARAM Wparam, LPARAM Lparam);
 };

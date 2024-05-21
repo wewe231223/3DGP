@@ -12,4 +12,6 @@ private:
 	ComPtr<ID3D12Resource> m_uploadHeap{ nullptr };
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC m_srvDesciption{};
+public:
+	void CreateSRV(ID3D12Device* device,D3D12_CPU_DESCRIPTOR_HANDLE handle);
 };

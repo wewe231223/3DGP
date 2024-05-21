@@ -7,7 +7,7 @@ CommandQueue::CommandQueue(ID3D12Device* device){
 	CommandDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
 	CheckFailed(device->CreateCommandQueue(&CommandDesc, IID_PPV_ARGS(m_commandQueue.GetAddressOf())));
 
-	m_syncHandle = ::CreateEventEx(nullptr, NULL, NULL, EVENT_ALL_ACCESS);
+	m_syncHandle = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);
 	CheckFailed(device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(m_fence.GetAddressOf())));
 }
 

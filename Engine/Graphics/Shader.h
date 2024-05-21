@@ -50,8 +50,15 @@ class DefaultInstancingShading final : public ShadingModel {
 public:
 	DefaultInstancingShading(ID3D12Device* device, ID3D12GraphicsCommandList* commandList);
 	virtual ~DefaultInstancingShading();
+private:
+	ComPtr<ID3D12Resource> m_instancingBuffer{ nullptr };
+	
+	D3D12_VERTEX_BUFFER_VIEW m_instancingBufferView{ };
+	void* m_instanceData{ nullptr };
 public:
 	virtual void Bind(ID3D12GraphicsCommandList* commandList) override;
+	void* GetInstanceDataAddr();
+	D3D12_VERTEX_BUFFER_VIEW GetInstanceView();
 public:
 	class Vertex {
 	public:
@@ -59,6 +66,12 @@ public:
 		DirectX::XMFLOAT3 normal;
 		DirectX::XMFLOAT2 uv;
 	};
+
+	class InstanceData {
+	public:
+		DirectX::XMFLOAT4X4 world;
+	};
+
 	static const UINT TableRootIndex = 2;
 
 };

@@ -159,6 +159,6 @@ void SwapChain::ResolveRenderTarget(ID3D12GraphicsCommandList* commandlist){
 
 
 void SwapChain::Present(){
-	m_swapChain->Present(0, 0);
+	CheckFailed(m_swapChain->Present(0, 0));
 	m_currBackbufferIndex = ( m_currBackbufferIndex + 1 ) % SwapChain::BUFFER_COUNT;
 }

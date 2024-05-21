@@ -117,12 +117,6 @@
     <ClInclude Include="Graphics\Shader.h">
       <Filter>Header\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GraphicsPipeline.h">
-      <Filter>Header\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\RootSignature.h">
-      <Filter>Header\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="System\DescriptorTable.h">
       <Filter>Header\System\DirectX</Filter>
     </ClInclude>
@@ -131,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="Graphics\Textrue.h">
       <Filter>Header\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Camera.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Input.h">
+      <Filter>Header\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,12 +188,6 @@
     <ClCompile Include="Graphics\Shader.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GraphicsPipeline.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\RootSignature.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="System\DescriptorTable.cpp">
       <Filter>Source\System\DirectX</Filter>
     </ClCompile>
@@ -202,6 +196,12 @@
     </ClCompile>
     <ClCompile Include="Graphics\Textrue.cpp">
       <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Camera.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Input.cpp">
+      <Filter>Source\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

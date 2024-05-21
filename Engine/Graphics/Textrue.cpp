@@ -61,3 +61,7 @@ Texture::~Texture(){
 
 }
 
+void Texture::CreateSRV(ID3D12Device* device,D3D12_CPU_DESCRIPTOR_HANDLE handle){
+	device->CreateShaderResourceView(m_defaultHeap.Get(), &m_srvDesciption, handle);
+}
+

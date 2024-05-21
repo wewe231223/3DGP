@@ -229,7 +229,7 @@ DefaultInstancingShading::DefaultInstancingShading(ID3D12Device* device,ID3D12Gr
 
 	ranges[1].BaseShaderRegister = 2;
 	ranges[1].NumDescriptors = 1;
-	ranges[1].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	ranges[1].OffsetInDescriptorsFromTableStart = 1;
 	ranges[1].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
 
 	rootparameters[0].InitAsConstants(16, 0, 0, D3D12_SHADER_VISIBILITY_VERTEX); // World Matrix ( b0 )
@@ -246,7 +246,7 @@ DefaultInstancingShading::DefaultInstancingShading(ID3D12Device* device,ID3D12Gr
 
 
 	D3D12_INPUT_LAYOUT_DESC inputlayout{};
-	D3D12_INPUT_ELEMENT_DESC inputelements[3]{};
+	D3D12_INPUT_ELEMENT_DESC inputelements[7]{};
 
 	inputelements[0] = { "POSITION",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0 };
 	inputelements[1] = { "NORMAL",0,DXGI_FORMAT_R32G32B32_FLOAT,0,12,D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0 };
@@ -254,14 +254,14 @@ DefaultInstancingShading::DefaultInstancingShading(ID3D12Device* device,ID3D12Gr
 	
 	
 	//// 인스턴싱 데이터, 행렬은 R32G32B32A32 가 4개 있어야 4x4 행렬이 완성되므로, 이처럼 InputLayout 을 구성해야 한다. 
-	//inputelements[4] = 
-	//{ "WORLDMATRIX",0,DXGI_FORMAT_R32G32B32A32_FLOAT,1,0,D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,1 };
-	//inputelements[5] = 
-	//{ "WORLDMATRIX",1,DXGI_FORMAT_R32G32B32A32_FLOAT,1,16,D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,1 };
-	//inputelements[6] = 
-	//{ "WORLDMATRIX",2,DXGI_FORMAT_R32G32B32A32_FLOAT,1,32,D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,1 };
-	//inputelements[7] = 
-	//{ "WORLDMATRIX",3,DXGI_FORMAT_R32G32B32A32_FLOAT,1,48,D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,1 };
+	inputelements[3] = 
+	{ "WORLDMATRIX",0,DXGI_FORMAT_R32G32B32A32_FLOAT,1,0,D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,1 };
+	inputelements[4] = 
+	{ "WORLDMATRIX",1,DXGI_FORMAT_R32G32B32A32_FLOAT,1,16,D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,1 };
+	inputelements[5] = 
+	{ "WORLDMATRIX",2,DXGI_FORMAT_R32G32B32A32_FLOAT,1,32,D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,1 };
+	inputelements[6] = 
+	{ "WORLDMATRIX",3,DXGI_FORMAT_R32G32B32A32_FLOAT,1,48,D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,1 };
 
 
 
@@ -294,7 +294,25 @@ DefaultInstancingShading::DefaultInstancingShading(ID3D12Device* device,ID3D12Gr
 
 	CheckFailed(device->CreateGraphicsPipelineState(std::addressof(pipelineDesc), IID_PPV_ARGS(m_pipelineState.GetAddressOf())));
 
+	CD3DX12_HEAP_PROPERTIES UploadHeapProperties{ D3D12_HEAP_TYPE_UPLOAD };
+	CD3DX12_RESOURCE_DESC resourceDesc{ CD3DX12_RESOURCE_DESC::Buffer(sizeof(InstanceData) * 10000) };
+	
+	CheckFailed(
+	device->CreateCommittedResource(
+		&UploadHeapProperties,
+		D3D12_HEAP_FLAG_NONE,
+		&resourceDesc,
+		D3D12_RESOURCE_STATE_COMMON,
+		nullptr,
+		IID_PPV_ARGS(m_instancingBuffer.GetAddressOf())
+	));
 
+
+	m_instancingBuffer->Map(0, NULL, &m_instanceData);
+	
+	m_instancingBufferView.BufferLocation = m_instancingBuffer->GetGPUVirtualAddress();
+	m_instancingBufferView.SizeInBytes = sizeof(InstanceData) * 10000;
+	m_instancingBufferView.StrideInBytes = sizeof(InstanceData);
 }
 
 DefaultInstancingShading::~DefaultInstancingShading()
@@ -304,4 +322,12 @@ DefaultInstancingShading::~DefaultInstancingShading()
 void DefaultInstancingShading::Bind(ID3D12GraphicsCommandList* commandList){
 	commandList->SetGraphicsRootSignature(m_rootSignatrue.Get());
 	commandList->SetPipelineState(m_pipelineState.Get());
+}
+
+void* DefaultInstancingShading::GetInstanceDataAddr(){
+	return m_instanceData;
+}
+
+D3D12_VERTEX_BUFFER_VIEW DefaultInstancingShading::GetInstanceView(){
+	return m_instancingBufferView;
 }

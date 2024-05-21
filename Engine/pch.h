@@ -66,4 +66,25 @@ enum class ShaderType {
 	ShaderTypeCount
 };
 
+enum class KEY_STATE {
+	/// <summary>
+	///  nothing state 
+	/// </summary>
+	NONE,
+
+	/// <summary>
+	///  pressed on time 
+	/// </summary>
+	DOWN,
+
+	/// <summary>
+	///  pressing during time 
+	/// </summary>
+	PRESS,
+
+	/// <summary>
+	///  released on time  
+	/// </summary>
+	RELEASE
+};
 #endif //PCH_H

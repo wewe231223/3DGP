@@ -42,34 +42,52 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HWND hWnd = InitInstance(hInstance, nCmdShow);
     if (!hWnd) return FALSE;
 
-
     try {
-        GameRenderEngine = std::make_unique<Engine>(hInstance, hWnd);
+        try {
+            GameRenderEngine = std::make_unique<Engine>(hInstance, hWnd);
+        }
+        catch (Exeption e) {
+            MessageBox(nullptr, e.ToString().c_str(), _T("Error"), MB_OK);
+            PostQuitMessage(0);
+        }
     }
-    catch (Exeption e) {
-        MessageBox(nullptr, e.ToString().c_str(), _T("Error"), MB_OK);
+    catch (std::runtime_error err) {
+        MessageBoxA(nullptr, err.what(), "Error", MB_OK);
         PostQuitMessage(0);
     }
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_MY3DGPGAME));
 
     MSG msg;
+    try{
+        try {
+            while (true) {
+                if (::PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+                {
+                    if (msg.message == WM_QUIT)
+                        break;
 
-    while(true){
-		if (::PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
-		{
-			if (msg.message == WM_QUIT)
-				break;
+                    if (!::TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
 
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		else
-		{
-			GameRenderEngine->Update();
-            GameRenderEngine->Render();
-		}
-	}
+                        TranslateMessage(&msg);
+                        DispatchMessage(&msg);
+                    }
+                }
+          
+                GameRenderEngine->Update();
+                GameRenderEngine->Render();
+            
+            }
+        }
+        catch (Exeption e) {
+            MessageBox(nullptr, e.ToString().c_str(), _T("Error"), MB_OK);
+            PostQuitMessage(0);
+        }
+    }
+    catch (std::runtime_error err) {
+        MessageBoxA(nullptr, err.what(), "Error", MB_OK);
+        PostQuitMessage(0);
+    }
 
     return (int) msg.wParam;
 }
@@ -141,8 +159,40 @@ HWND InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
-    
-    return GameRenderEngine ? GameRenderEngine->ProcessWindowMessage(message, wParam, lParam) : DefWindowProc(hWnd,message,wParam,lParam);
+    switch (message)
+    {
+    case WM_COMMAND:
+    {
+        int wmId = LOWORD(wParam);
+        // 메뉴 선택을 구문 분석합니다:
+        switch (wmId)
+        {
+        case IDM_ABOUT:
+            DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+            break;
+        case IDM_EXIT:
+            DestroyWindow(hWnd);
+            break;
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
+        }
+    }
+    break;
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
+        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+        EndPaint(hWnd, &ps);
+    }
+    break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+    return 0;
 }
 
 // 정보 대화 상자의 메시지 처리기입니다.

@@ -9,6 +9,7 @@
 #include "System/CommandList.h"
 #include "System/CommandQueue.h"
 #include "System/Timer.h"
+#include "System/Input.h"
 #include "Graphics/Scene.h"
 #pragma endregion 
 
@@ -24,6 +25,7 @@ Engine::Engine(HINSTANCE__* hInstance, HWND__* hWnd) : m_hInstance(hInstance), m
 	m_renderCommandList = std::make_unique<CommandList>(m_device->GetDevice());
 	m_depthStencil = std::make_unique<DepthStencil>(m_device->GetDevice());
 	m_timer = std::make_unique<Timer>(m_hWnd);
+	m_input = std::make_unique<Input>(m_hWnd, m_hInstance);
 
 
 	::GetClientRect(m_hWnd, std::addressof(m_clientRect));
@@ -39,6 +41,8 @@ Engine::Engine(HINSTANCE__* hInstance, HWND__* hWnd) : m_hInstance(hInstance), m
 	ID3D12CommandList* commandlists[]{ m_resourceCommandList->GetCommandList() };
 	m_commandQueue->Execute(commandlists, _countof(commandlists));
 	m_commandQueue->SingleSync();
+
+
 	m_timer->Start();
 
 
@@ -51,6 +55,8 @@ Engine::~Engine() {
 
 void Engine::Update(){
 	m_timer->Update();
+	m_input->Update();
+	m_scene->Update(m_input.get(), m_timer->GetTimeElapsed());
 }
 
 void Engine::Render(){
@@ -99,19 +105,3 @@ void Engine::Resize(){
 	m_commandQueue->SingleSync();
 }
 
-LRESULT Engine::ProcessWindowMessage(UINT Msg, WPARAM Wparam, LPARAM Lparam){
-	if (m_hWnd){
-		switch (Msg)
-		{
-		case WM_SIZE:
-		
-			break;
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			break;
-		default:
-			return DefWindowProc(m_hWnd, Msg, Wparam, Lparam);
-		}
-	}
-	return LRESULT();
-}
