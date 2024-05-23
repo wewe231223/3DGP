@@ -10,7 +10,7 @@
 
 #pragma endregion 
 
-Scene::Scene(ID3D12Device* device,ID3D12GraphicsCommandList* commandList){
+Scene::Scene(ID3D12Device* device,ID3D12GraphicsCommandList* commandList, std::shared_ptr<Window_info> windowInfo){
 	m_defaultShadingModel = std::make_unique<DefaultInstancingShading>(device,commandList);
 
 	// 이제 거의다 왔다 

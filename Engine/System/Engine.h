@@ -7,6 +7,7 @@ public:
 private:
 	struct HINSTANCE__*						m_hInstance{ nullptr };
 	struct HWND__*							m_hWnd{ nullptr };
+	std::shared_ptr<class Window_info>		m_windowInfo{ nullptr };
 private:
 	RECT									m_clientRect{};
 	std::unique_ptr<class Device>			m_device{ nullptr };

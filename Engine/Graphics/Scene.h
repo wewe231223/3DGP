@@ -4,7 +4,7 @@
 
 class Scene {
 public:
-	Scene(ID3D12Device* device,ID3D12GraphicsCommandList* commandList);
+	Scene(ID3D12Device* device,ID3D12GraphicsCommandList* commandList,std::shared_ptr<class Window_info> windowInfo);
 	virtual ~Scene();
 private:
 	std::unique_ptr<class Camera> m_camera{ nullptr };

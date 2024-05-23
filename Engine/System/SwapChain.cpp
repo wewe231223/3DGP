@@ -114,7 +114,7 @@ void SwapChain::Resize(ID3D12Device* device, ID3D12CommandList* commandlist, REC
 
 	D3D12_RENDER_TARGET_VIEW_DESC rtvdesc{};
 	rtvdesc.Format = m_format;
-	rtvdesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2DMS;
+	rtvdesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
 
 	
 

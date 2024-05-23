@@ -66,6 +66,12 @@ enum class ShaderType {
 	ShaderTypeCount
 };
 
+struct Window_info {
+	RECT m_windowRect{};
+	const UINT m_msaaLevel{ 4U };
+	UINT m_msaaQuality{};
+};
+
 enum class KEY_STATE {
 	/// <summary>
 	///  nothing state 
