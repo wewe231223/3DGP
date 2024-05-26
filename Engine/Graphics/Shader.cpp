@@ -302,7 +302,7 @@ DefaultInstancingShading::DefaultInstancingShading(ID3D12Device* device,ID3D12Gr
 		&UploadHeapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
-		D3D12_RESOURCE_STATE_COMMON,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
 		IID_PPV_ARGS(m_instancingBuffer.GetAddressOf())
 	));

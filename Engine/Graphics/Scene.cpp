@@ -7,6 +7,7 @@
 #include "Graphics/Mesh.h"
 #include "Graphics/Camera.h"
 #include "System/Input.h"
+#include "Graphics/Material.h"
 
 #pragma endregion 
 
@@ -37,6 +38,7 @@ Scene::Scene(ID3D12Device* device,ID3D12GraphicsCommandList* commandList, std::s
 
 
 	m_tex->CreateSRV(device, descheap->GetCPUDescriptorHandleForHeapStart());
+	
 
 
 

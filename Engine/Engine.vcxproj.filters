@@ -132,6 +132,15 @@
     <ClInclude Include="System\Input.h">
       <Filter>Header\System</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Renderer.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceManager.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SceneManager.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -202,6 +211,15 @@
     </ClCompile>
     <ClCompile Include="System\Input.cpp">
       <Filter>Source\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderer.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceManager.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SceneManager.cpp">
+      <Filter>Source\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

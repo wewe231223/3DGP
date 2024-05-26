@@ -53,3 +53,15 @@
 // 
 // 
 //
+
+
+// 모든 리소스들을 받아놓고 마지막에 한번에 쭉 만들어야 한다.
+// 근데 바인딩은 어떻게? 
+class DescriptorTable {
+public:
+	DescriptorTable(ID3D12Device* device);
+	~DescriptorTable();
+private:
+	ComPtr<ID3D12DescriptorHeap> m_descriptorHeap{ nullptr };
+
+};

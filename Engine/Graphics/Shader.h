@@ -75,3 +75,10 @@ public:
 	static const UINT TableRootIndex = 2;
 
 };
+
+
+
+// 리소스와 게임을 완전히 분리하자. 
+// 리소스 매니저 - 씬 - Renderer
+
+
